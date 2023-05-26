@@ -1,14 +1,14 @@
 import express from 'express';
-import productController from './controllers/productController';
+import { newProductController, getAllProductsController } from './controllers/productController';
 
 const app = express();
 
 app.use(express.json());
 
 // endpoint - requisito 1
-app.post('/products', productController.newProductController);
+app.post('/products', newProductController);
 
 // endpoint - requisito 2
-app.get('/products', productController.getAllProductsController);
+app.get('/products', getAllProductsController);
 
 export default app;
