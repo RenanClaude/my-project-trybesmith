@@ -12,4 +12,3 @@ app.post('/products', productController.newProductController);
 app.get('/products', productController.getAllProductsController);
 
 export default app;
-//
