@@ -4,7 +4,7 @@ import sinonChai from 'sinon-chai';
 import { Request, Response } from 'express';
 import productService from '../../../src/services/productService';
 import { Product } from '../../../src/types/Product';
-import newProductController from '../../../src/controllers/productController'
+import productController from '../../../src/controllers/productController'
 
 chai.use(sinonChai);
 
@@ -35,7 +35,7 @@ describe('ProductsController', function () {
     sinon.stub(productService, 'newProductService').resolves(serviceResponse)
 
     //act
-    await newProductController(req, res);
+    await productController.newProductController(req, res);
 
     //assert
     expect(res.status).to.have.been.calledWith(201);

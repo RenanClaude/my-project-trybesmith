@@ -12,4 +12,12 @@ const newProductService = async (product: Product): Promise<Product> => {
 };
 // newProductService({ name: 'Nome de produto caro', price: '1.000.000 de btc', orderId: 171 });
 
-export default { newProductService };
+const getAllProductsService = async (): Promise<Product[]> => {
+  const allProducts = await ProductModel.findAll();
+  const result = allProducts.map((product) => product.dataValues);
+  // console.log(result);
+  return result;
+};
+// getAllProductsService();
+
+export default { newProductService, getAllProductsService };
