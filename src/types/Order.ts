@@ -1,5 +1,12 @@
 export type Order = {
-  id: 'fake';
-  userId: 'fake';
-  productId?: 'fake';
+  id: number;
+  userId: number;
+  productId?: number[];
+  productIds?: { id:number }[];
+};
+
+export type TypeResultAllOrders = {
+  id: number,
+  userId: number,
+  productIds: number[],
 };
