@@ -23,7 +23,7 @@ export default {
         vocation: 'Curandeira',
         level: 9,
         password: bcrypt.hashSync('valquíria', SALT_ROUNDS),
-      },
+      }
     ], {});
   },
   

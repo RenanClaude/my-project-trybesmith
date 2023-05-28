@@ -3,13 +3,14 @@ import { newProductController, getAllProductsController } from './controllers/pr
 import getAllOrdersController from './controllers/orderController';
 import { verifyLoginFields } from './middlewares/verifyLogin';
 import loginController from './controllers/loginController';
+import { verifyNewProductName, verifyNewProductPrice } from './middlewares/verifyProduct';
 
 const app = express();
 
 app.use(express.json());
 
-// endpoint - requisito 1
-app.post('/products', newProductController);
+// endpoint - requisito 1 e 5
+app.post('/products', verifyNewProductName, verifyNewProductPrice, newProductController);
 
 // endpoint - requisito 2
 app.get('/products', getAllProductsController);
