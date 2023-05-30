@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import OrderModel from '../../../src/database/models/order.model';
-import { updateNewOrderService } from '../../../src/services/orderService'
+import orderService from '../../../src/services/orderService'
 
 describe('OrdersService', function () {
   beforeEach(function () { sinon.restore(); });
@@ -20,7 +20,7 @@ describe('OrdersService', function () {
     sinon.stub(OrderModel, 'create').resolves(newOrder)
 
     //act
-    const response = await updateNewOrderService(body.userId, body.productIds);
+    const response = await orderService.updateNewOrderService(body.userId, body.productIds);
 
     //assert
     expect(response).to.be.equal('Ok')

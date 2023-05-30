@@ -1,8 +1,11 @@
-import { NewOrderController } from './../../../src/controllers/orderController';
+import orderController from './../../../src/controllers/orderController';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { Request, Response } from 'express';
+// import { queryByUserIdService } from '../../../src/services/orderService';
+import orderService from '../../../src/services/orderService';
+import { User } from '../../../src/types/User';
 
 chai.use(sinonChai);
 
@@ -23,8 +26,17 @@ describe('OrdersController', function () {
       productIds: [1, 2]
     }
 
+    const user: User = {
+      id: 3,
+      username: 'x',
+      vocation: 'y',
+      level: 1,
+      password: 'z'
+    }
+
+    sinon.stub(orderService, 'queryByUserIdService').resolves(user)
     //act
-    await NewOrderController(req, res);
+    await orderController.NewOrderController(req, res);
 
     //assert
     expect(res.status).to.have.been.calledWith(201);

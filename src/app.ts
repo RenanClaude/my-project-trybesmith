@@ -1,6 +1,6 @@
 import express from 'express';
 import { newProductController, getAllProductsController } from './controllers/productController';
-import { getAllOrdersController, NewOrderController } from './controllers/orderController';
+import orderController from './controllers/orderController';
 import { verifyLoginFields, verifyToken } from './middlewares/verifyLogin';
 import loginController from './controllers/loginController';
 import { verifyNewProductName, verifyNewProductPrice } from './middlewares/verifyProduct';
@@ -17,7 +17,7 @@ app.post('/products', verifyNewProductName, verifyNewProductPrice, newProductCon
 app.get('/products', getAllProductsController);
 
 // endpoint - requisito 3
-app.get('/orders', getAllOrdersController);
+app.get('/orders', orderController.getAllOrdersController);
 
 // endpoint - requisito 4
 app.post('/login', verifyLoginFields, loginController);
@@ -28,7 +28,7 @@ app.post(
   verifyToken,
   verifyNewOrderUserId,
   verifyNewOrderProductIds,
-  NewOrderController,
+  orderController.NewOrderController,
 );
 
 export default app;

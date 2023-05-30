@@ -7,7 +7,7 @@ import UserModel from '../database/models/user.model';
 const getProductIds = (productIds?: { id: number }[]): number[] => 
   (productIds ? productIds.map((obj) => obj.id) : []);
 
-export const getAllOrdersService = async (): Promise<TypeResultAllOrders[]> => {
+const getAllOrdersService = async (): Promise<TypeResultAllOrders[]> => {
   const allOrders = await OrderModel.findAll({ 
     include: [{
       model: ProductModel, as: 'productIds', attributes: ['id'],
@@ -22,7 +22,7 @@ export const getAllOrdersService = async (): Promise<TypeResultAllOrders[]> => {
   return getResult;
 };
 
-export const queryByUserIdService = async (userId: number): Promise<User | undefined> => {
+const queryByUserIdService = async (userId: number): Promise<User | undefined> => {
   const queryByUserId = await UserModel.findOne({ where: { id: userId } });
   const queryResult = queryByUserId?.dataValues;
   return queryResult;
@@ -35,7 +35,7 @@ export const queryByUserIdService = async (userId: number): Promise<User | undef
 // };
 // // getProductById(2);
 
-export const updateNewOrderService = async (userId: number, productIds: number[])
+const updateNewOrderService = async (userId: number, productIds: number[])
 : Promise<string> => {
   const createdOrder = await OrderModel.create({ userId });
   const newOrderId: number = createdOrder.dataValues.id;
@@ -51,3 +51,5 @@ export const updateNewOrderService = async (userId: number, productIds: number[]
   return 'Ok';
 };
 // updateNewOrderService(3, [2, 1]);
+
+export default { queryByUserIdService, updateNewOrderService, getAllOrdersService };

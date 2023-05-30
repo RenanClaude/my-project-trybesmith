@@ -1,18 +1,21 @@
 import { Request, Response } from 'express';
-import { getAllOrdersService,
-  queryByUserIdService, updateNewOrderService } from '../services/orderService';
+// import { getAllOrdersService,
+//   queryByUserIdService, updateNewOrderService } from '../services/orderService';
+import orderService from '../services/orderService';
 
-export const getAllOrdersController = async (req: Request, res: Response) => {
-  const allOrders = await getAllOrdersService();
+const getAllOrdersController = async (req: Request, res: Response) => {
+  const allOrders = await orderService.getAllOrdersService();
   return res.status(200).json(allOrders);
 };
 
-export const NewOrderController = async (req: Request, res: Response) => {
+const NewOrderController = async (req: Request, res: Response) => {
   const { userId, productIds } = req.body;
 
-  const verifyUserId = await queryByUserIdService(userId);
+  const verifyUserId = await orderService.queryByUserIdService(userId);
   if (!verifyUserId) { return res.status(404).json({ message: '"userId" not found' }); }
 
-  await updateNewOrderService(userId, productIds);
+  await orderService.updateNewOrderService(userId, productIds);
   return res.status(201).json({ userId, productIds });
 };
+
+export default { NewOrderController, getAllOrdersController };
