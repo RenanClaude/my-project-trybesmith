@@ -15,9 +15,7 @@ const newProductService = async (product: Product): Promise<Product> => {
 const getAllProductsService = async (): Promise<Product[]> => {
   const allProducts = await ProductModel.findAll();
   const result = allProducts.map((product) => product.dataValues);
-  // console.log(result);
   return result;
 };
-// getAllProductsService();
 
 export default { newProductService, getAllProductsService };

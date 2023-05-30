@@ -11,14 +11,29 @@ const verifyLoginFields = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+const secret: string = process.env.JWT_SECRET || 'secret';
+
 const getToken = (userData: User) => {
   const { id, username } = userData;
-
-  const secret: string = process.env.JWT_SECRET || 'secret';
   const payload = { id, username };
 
   const token = jwt.sign(payload, secret);
   return token;
 };
 
-export { verifyLoginFields, getToken };
+const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+  const { authorization: token } = req.headers;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Token not found' });
+  }
+  try {
+    jwt.verify(token, secret);
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+
+  next();
+};
+
+export { verifyLoginFields, getToken, verifyToken };

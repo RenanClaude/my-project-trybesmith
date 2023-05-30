@@ -1,3 +1,4 @@
+import { NewOrderController } from './../../../src/controllers/orderController';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -15,4 +16,17 @@ describe('OrdersController', function () {
     sinon.restore();
   });
 
+  it('Caso de sucesso - Criar novo pedido a um produto existente e retornar status 201', async () => {
+    //arrange
+    req.body = {
+      userId: 3,
+      productIds: [1, 2]
+    }
+
+    //act
+    await NewOrderController(req, res);
+
+    //assert
+    expect(res.status).to.have.been.calledWith(201);
+  })
 });
