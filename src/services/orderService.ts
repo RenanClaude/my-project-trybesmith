@@ -3,7 +3,6 @@ import OrderModel from '../database/models/order.model';
 import ProductModel from '../database/models/product.model';
 import { TypeResultAllOrders } from '../types/Order';
 import UserModel from '../database/models/user.model';
-import { Product } from '../types/Product';
 
 const getProductIds = (productIds?: { id: number }[]): number[] => 
   (productIds ? productIds.map((obj) => obj.id) : []);
