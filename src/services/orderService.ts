@@ -28,13 +28,6 @@ const queryByUserIdService = async (userId: number): Promise<User | undefined> =
   return queryResult;
 };
 
-// export const getProductById = async (productId: number): Promise<Product | undefined> => {
-//   const queryResult = await ProductModel.findOne({ where: { id: productId } });
-//   // console.log(queryResult?.dataValues);
-//   return queryResult?.dataValues;
-// };
-// // getProductById(2);
-
 const updateNewOrderService = async (userId: number, productIds: number[])
 : Promise<string> => {
   const createdOrder = await OrderModel.create({ userId });
@@ -50,6 +43,5 @@ const updateNewOrderService = async (userId: number, productIds: number[])
   await Promise.all(updateOrderId);
   return 'Ok';
 };
-// updateNewOrderService(3, [2, 1]);
 
 export default { queryByUserIdService, updateNewOrderService, getAllOrdersService };
